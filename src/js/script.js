@@ -79,7 +79,7 @@ function collisions() {
                 //if the ball's center collides with a brick's x or y edge
                 //let xPerimeter = Math.cos(ballRadius)+x <-- attempt at making the hitbox round instead of centre circle
                 //let yPerimeter = Math.sin(ballRadius)+y
-                if (x > brick.x + ballRadius && x < brick.x + brickWidth + ballRadius && y > brick.y + ballRadius && y < brick.y + brickHeight + ballRadius) {
+                if (x > brick.x - ballRadius && x < brick.x + brickWidth + ballRadius && y > brick.y - ballRadius && y < brick.y + brickHeight + ballRadius) {
                     dy = -dy;   // forces the ball to bounce back maintaining x direction
                     brick.isBroken = true; // sets its broken bool to true
                     score++;    // update score since a brick has been destroyed
