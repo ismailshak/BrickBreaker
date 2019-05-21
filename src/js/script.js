@@ -11,17 +11,17 @@ let dx = 4;                         // change in x after every frame, effectivel
 let dy = -4;                        // change in y after every frame, effectively the speed of the ball in y
 let ballRadius = 10;
 
-let paddleHeight = 10;
+let paddleHeight = 10;              // thickness of paddle
 let paddleWidth = 100;
-let paddleX = (canvas.width-paddleWidth) / 2;
+let paddleX = (canvas.width-paddleWidth) / 2; // top left corner of paddle
 let paddleSpeed = 8;
 
 let brickRowCount = 3;
 let brickColumnCount = 7;
 let brickWidth = 80;
 let brickHeight = 20;
-let brickPadding = 10;
-let brickOffsetTop = 50;
+let brickPadding = 10;              // to control space between each brick
+let brickOffsetTop = 50;            // amount of white space to the top of first row
 let brickOffsetLeft = (cWidth-(brickColumnCount*(brickPadding+brickWidth)))/2;       // whatever white space remains after bricks are placed, place half on each side
 
 let score = 0;
@@ -30,6 +30,7 @@ let rightPressed = false;
 let leftPressed = false;
 
 let bricks = [];
+// creates a 2d array of bricks not yet given a position on the screen
 for(let col=0; col<brickColumnCount; col++) {
     bricks[col] = [];
     for(let row=0; row<brickRowCount; row++) {
@@ -46,9 +47,9 @@ document.addEventListener("keyup", keyUp, false);
 document.addEventListener("mousemove", mouseMove, false)
 
 function mouseMove(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
-        paddleX = relativeX - paddleWidth/2;
+    var thisX = e.clientX - canvas.offsetLeft; // to match mouse and paddle position
+    if(thisX > 0 && thisX < canvas.width) {
+        paddleX = thisX - paddleWidth/2;
     }
 }
 
@@ -75,13 +76,13 @@ function collisions() {
         for (let row = 0; row < brickRowCount; row++) {
             let brick = bricks[col][row];
             if (brick.isBroken == false) {
-                //if the ball
-                //let xPerimeter = Math.cos(ballRadius)+x
+                //if the ball's center collides with a brick's x or y edge
+                //let xPerimeter = Math.cos(ballRadius)+x <-- attempt at making the hitbox round instead of centre circle
                 //let yPerimeter = Math.sin(ballRadius)+y
-                if (x > brick.x && x < brick.x + brickWidth && y > brick.y && y < brick.y + brickHeight) {
-                    dy = -dy;
-                    brick.isBroken = true;
-                    score++;
+                if (x > brick.x + ballRadius && x < brick.x + brickWidth + ballRadius && y > brick.y + ballRadius && y < brick.y + brickHeight + ballRadius) {
+                    dy = -dy;   // forces the ball to bounce back maintaining x direction
+                    brick.isBroken = true; // sets its broken bool to true
+                    score++;    // update score since a brick has been destroyed
                     if(score === brickRowCount*brickColumnCount) {
                         alert("YOU WIN, CONGRATULATIONS!");
                         document.location.reload();
@@ -112,8 +113,9 @@ function renderBricks() {
 
     for (let col = 0; col < brickColumnCount; col++) {
         for (let row = 0; row < brickRowCount; row++) {
-            // if the brick hasn't been destroyed
+            // if the brick hasn't been destroyed - bricks are re-rendered every frame
             if (bricks[col][row].isBroken == false) {
+                // takes into account row/col number, padding and offset to render each brick
                 let brickX = (col * (brickWidth + brickPadding)) + brickOffsetLeft;
                 let brickY = (row * (brickHeight + brickPadding)) + brickOffsetTop;
                 bricks[col][row].x = brickX;
@@ -129,15 +131,15 @@ function renderBricks() {
 }
 
 function renderScore() {
-    context.font = "16px Arial";
+    context.font = "18px Verdana";
     context.fillStyle = "blue";
     context.fillText("Score: "+score, 8, 30);
 }
 
 function renderLives() {
-    context.font = "16px Arial";
+    context.font = "18px Verdana";
     context.fillStyle = "blue";
-    context.fillText("Lives: "+lives, canvas.width-65, 30);
+    context.fillText("Lives: "+lives, canvas.width-75, 30);
 }
 
 function render() {
@@ -170,7 +172,6 @@ function render() {
         if(x > paddleX && x < paddleX + paddleWidth) { // if the ball hits the paddle, bounce back
             dy = -dy;
         } else { // if the ball falls below the paddle alert game over
-            //alert("GAME OVER");
             lives--;
             if(lives === 0) {
                 alert("GAME OVER");
@@ -192,7 +193,7 @@ function render() {
     else if(leftPressed && paddleX > 0) {
         paddleX -= paddleSpeed;
     }
-    //requestAnimationFrame(render);
+    requestAnimationFrame(render);
 }
 render();
 
