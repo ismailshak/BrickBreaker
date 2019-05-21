@@ -169,7 +169,7 @@ function render() {
         dy = -dy;
     } else if(y + dy > canvas.height-ballRadius) {
         
-        if(x > paddleX && x < paddleX + paddleWidth) { // if the ball hits the paddle, bounce back
+        if(x > paddleX && x < paddleX + paddleWidth && y > paddleHeight + ballRadius) { // if the ball hits the paddle, bounce back
             dy = -dy;
         } else { // if the ball falls below the paddle alert game over
             lives--;
