@@ -1,14 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script> 
+    <link href="https://fonts.googleapis.com/css?family=Cute+Font&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/css/style.css">
-    <title>Brick Breaker</title>
 </head>
 <body>
-    <canvas id="mainCanvas" width="700" height="400"></canvas>
-    <script src="./src/js/script.js"></script>
+
+    <div class="gameover-container">
+            <span class='message'>Game Over</span>
+            <button type="button" class='retry'>Retry</button>
+    </div>
+    <div class="winner-container">
+            <span class='message'>Winner Winner <br><span class="chicken-dinner">Chicken Dinner</span></span>
+            <button type="button" class='play-again'>Play Again</button>
+    </div> 
+    <div class="page-container">
+        <div class="sidebar">
+            <div class="title">
+                <span class="title-top">Brick</span>
+                <span class="title-bottom">Breaker</span>
+            </div>
+            <main class="rules-container">
+                <p>Your goal is to knock down as many bricks as you can before you run out of lives. 
+                    You control the paddle by hovering over the game screen. The paddle
+                    will follow your mouse's movements. <br><br>
+                Click on the game screen to begin.</p>
+            </main>
+                <section class="stats-container">
+                        <div class="score-container">
+                            <span class="score-title">Score: </span>
+                            <span class="score"></span>
+                        </div>
+                        <div class="lives-container">
+                                <span class="lives-title">Lives: </span>
+                                <span class="lives"></span>
+                        </div>
+                </section>
+        </div>
+        <div id="game-container">
+        </div>
+    </div>
+<script src="./src/js/script.js"></script>
 </body>
 </html>
