@@ -1,0 +1,125 @@
+{
+	"textures": [
+		{
+			"image": "spritesheet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 328,
+				"h": 25
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "paddle1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 88,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 88,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 88,
+						"h": 23
+					}
+				},
+				{
+					"filename": "blueTile.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 23
+					},
+					"frame": {
+						"x": 91,
+						"y": 1,
+						"w": 69,
+						"h": 23
+					}
+				},
+				{
+					"filename": "greenTile.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 23
+					},
+					"frame": {
+						"x": 162,
+						"y": 1,
+						"w": 69,
+						"h": 23
+					}
+				},
+				{
+					"filename": "redTile.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 23
+					},
+					"frame": {
+						"x": 233,
+						"y": 1,
+						"w": 69,
+						"h": 23
+					}
+				},
+				{
+					"filename": "ball.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 23,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 23,
+						"h": 23
+					},
+					"frame": {
+						"x": 304,
+						"y": 1,
+						"w": 23,
+						"h": 23
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4e423ab0c5d241fd8052f3ae9338354a:1f4c325b6f471c4531ba682af5c550c5:729adc6043343cfda41c447ce8f464d6$"
+	}
+}

@@ -1,0 +1,167 @@
+{
+	"textures": [
+		{
+			"image": "hundredSpritesheet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 497,
+				"h": 20
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "plusOneHundred1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 69,
+						"h": 18
+					}
+				},
+				{
+					"filename": "plusOneHundred2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 18
+					},
+					"frame": {
+						"x": 72,
+						"y": 1,
+						"w": 69,
+						"h": 18
+					}
+				},
+				{
+					"filename": "plusOneHundred3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 18
+					},
+					"frame": {
+						"x": 143,
+						"y": 1,
+						"w": 69,
+						"h": 18
+					}
+				},
+				{
+					"filename": "plusOneHundred4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 18
+					},
+					"frame": {
+						"x": 214,
+						"y": 1,
+						"w": 69,
+						"h": 18
+					}
+				},
+				{
+					"filename": "plusOneHundred5.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 18
+					},
+					"frame": {
+						"x": 285,
+						"y": 1,
+						"w": 69,
+						"h": 18
+					}
+				},
+				{
+					"filename": "plusOneHundred6.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 18
+					},
+					"frame": {
+						"x": 356,
+						"y": 1,
+						"w": 69,
+						"h": 18
+					}
+				},
+				{
+					"filename": "plusOneHundred7.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 18
+					},
+					"frame": {
+						"x": 427,
+						"y": 1,
+						"w": 69,
+						"h": 18
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a2acf6ba23b5264776515faeeff6b1c3:f34b353d60e97d4b241a9bf27389e8e3:3060bc47244a2d4b01ced768758df513$"
+	}
+}
