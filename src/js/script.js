@@ -28,11 +28,11 @@ var BrickBreaker = new Phaser.Class({
             'atlas' references a json file (spritesheet.json) for coordinates to locate a specific sprite
             within a single png file (spritesheet.png) that contains all used assets side by side.
         */
-        this.load.atlas('assets', './../../img/Tile Set/sprites/spritesheet.png','./../../img/Tile Set/sprites/spritesheet.json')
+        this.load.atlas('assets', './../img/Tile Set/sprites/spritesheet.png','./../img/Tile Set/sprites/spritesheet.json')
 
-        this.load.atlas('paddleSprite', './../../img/Tile Set/sprites/paddleSpritesheet.png', './../../img/Tile Set/sprites/paddleSpritesheet.json');
+        this.load.atlas('paddleSprite', './../img/Tile Set/sprites/paddleSpritesheet.png', './../img/Tile Set/sprites/paddleSpritesheet.json');
 
-        this.load.atlas('oneHundredSprite', './../../img/Tile Set/sprites/oneHundredSpritesheet.png', './../../img/Tile Set/sprites/oneHundredSpritesheet.json');
+        this.load.atlas('oneHundredSprite', './../img/Tile Set/sprites/oneHundredSpritesheet.png', './../img/Tile Set/sprites/oneHundredSpritesheet.json');
     },
     create: function(){
 
