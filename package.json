@@ -1,0 +1,22 @@
+{
+  "name": "brickbreaker",
+  "version": "1.0.0",
+  "description": "Brick Breaker game using Phaser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismailshak/BrickBreaker.git"
+  },
+  "author": "Ismail Elshakankiry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismailshak/BrickBreaker/issues"
+  },
+  "homepage": "https://github.com/ismailshak/BrickBreaker#readme",
+  "dependencies": {
+    "phaser": "^3.17.0"
+  }
+}
