@@ -144,7 +144,6 @@ var BrickBreaker = new Phaser.Class({
 
             // Paddle position doesn't phase outside the scene
             this.paddle.x = Phaser.Math.Clamp(e.x, this.paddle.width/2, this.width-(this.paddle.width/2));
-            console.log()
 
             // For the ball to move with the paddle at the start of a life/round
             if (this.ball.getData('onPaddle'))
@@ -180,10 +179,17 @@ var BrickBreaker = new Phaser.Class({
         var y = e.beta;
         var x = e.gamma;
         console.log(x)
-        console.log(game)
-        let paddle = game.scene.keys.brickbreaker.paddle
-        let width = game.scene.keys.brickbreaker.width;
-        paddle.x = Phaser.Math.Clamp(x, paddle.width/2, width-(paddle.width/2));
+        let paddleTemp = game.scene.keys.brickbreaker.paddle
+        let widthTemp = game.scene.keys.brickbreaker.width;
+        let ballTemp = game.scene.keys.brickbreaker.ball;
+        let NewValue = (((x - (-90)) * (widthTemp - 0)) / (90 - (-90))) + 0
+        paddleTemp.x = NewValue;//Phaser.Math.Clamp(x, paddleTemp.width/2, widthTemp-(paddleTemp.width/2));
+        console.log(NewValue)
+
+        if (ballTemp.getData('onPaddle'))
+        {
+            ballTemp.x = paddleTemp.x;
+        }
     },
 
     collisionBrick: function (ball, brick)
@@ -320,13 +326,27 @@ const retryButton = document.querySelector(".retry");
 const playAgainButton = document.querySelector(".play-again");
 const gameoverOverlay = document.querySelector(".gameover-container");
 const winnerOverlay = document.querySelector(".winner-container");
+const instructionsButton = document. querySelector(".instructions");
+const rules = document.querySelector(".rules-container");
 
 retryButton.addEventListener('click', function(e){
+    e.preventDefault();
     document.location.reload();
 });
 playAgainButton.addEventListener('click', function(e){
+    e.preventDefault();
     document.location.reload();
 });
+
+instructionsButton.addEventListener('click', function(e) {
+    
+    e.preventDefault();
+    if(rules.style.display === "none") {
+        rules.style.display = "block";
+    } else {
+        rules.style.display = "none"
+    }
+})
 
 // function restartGame() {
 //     document.location.reload();

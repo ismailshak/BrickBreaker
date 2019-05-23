@@ -51,10 +51,29 @@ canvas {
     text-align: center;
 }
 
-.rules-container {
-    max-width: 60%;
+.instructions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.instructions {
+    display: none;
     font-family: 'Cute Font', cursive;
     font-size: 24px;
+    text-decoration: underline;
+}
+
+.rules-container {
+    max-width: 60%;
+    display: block;
+    font-family: 'Cute Font', cursive;
+    font-size: 24px;
+}
+
+.rules-container p {
+    margin: 0;
 }
 
 .stats-container {
@@ -158,8 +177,20 @@ canvas {
     }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 480px) {
     .sidebar {
         flex-direction: column;
     }
+
+    .page-container {
+        justify-content: space-around;
+    }
+
+    .instructions {
+        display: block;
+    }
+    .rules-container{
+        display: none;
+    }
+        
 }
