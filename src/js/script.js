@@ -53,23 +53,23 @@ var BrickBreaker = new Phaser.Class({
             gridAlign: { width: this.brickColumnCount, height: this.brickRowCount, cellWidth: 70, cellHeight: 30, x: 85, y: 50 }
         });
 
-        // console.log(this.bricks)
-        // let currentBrick = this.bricks.children.entries[1]
-        // currentBrick = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'oneHundredSprite', 'plusOneHundred1.png');
-        // this.bricks.children.entries[1].disableBody(true, true);
-        // this.anims.create({
-        //     key: 'oneHundred',
-        //     frames: this.anims.generateFrameNames('oneHundredSprite', { 
-        //         prefix: "plusOneHundred", 
-        //         suffix: ".png",
-        //         start: 1,
-        //         end: 5,
-        //     }),
-        //     frameRate: 5,
-        //     repeat: -1
-        // });
-        // // Play the animation
-        // currentBrick.play('oneHundred');
+        //console.log(this.bricks)
+        let currentBrick = this.bricks.children.entries[50]
+        currentBrick = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'oneHundredSprite', 'plusOneHundred1.png').setImmovable();
+        this.bricks.children.entries[50].disableBody(true, true);
+        this.anims.create({
+            key: 'oneHundred',
+            frames: this.anims.generateFrameNames('oneHundredSprite', { 
+                prefix: "plusOneHundred", 
+                suffix: ".png",
+                start: 1,
+                end: 5,
+            }),
+            frameRate: 5,
+            repeat: -1
+        });
+        // Play the animation
+        currentBrick.play('oneHundred');
         
         // Create ball - give bounciness of 1 and allow it to interact with scene border.
         this.ball = this.physics.add.image(this.width/2, this.paddleTop, 'assets', 'ball.png').setCollideWorldBounds(true).setBounce(1);
@@ -109,6 +109,8 @@ var BrickBreaker = new Phaser.Class({
         // Fifth parameter, this, is the callback context. i.e. to pass the specific objects (ball and brick) to the callback function.
         this.physics.add.collider(this.ball, this.bricks, this.collisionBrick, null, this);
         this.physics.add.collider(this.ball, this.paddle, this.collisionPaddle, null, this);
+        this.physics.add.collider(this.ball, currentBrick, this.collisionPowerUp, null, this);
+        this.physics.add.collider(this.paddle, currentBrick, this.collisionPickUp, null, this);
 
         // Mouse event handlers
         this.input.on('pointermove', function (e) {
@@ -150,6 +152,15 @@ var BrickBreaker = new Phaser.Class({
         brick.disableBody(true, true);
 
         this.scoreCount++;
+    },
+
+    collisionPowerUp: function (ball, powerUp) {
+        powerUp.setVelocityY(100);
+    },
+
+    collisionPickUp: function (paddle, powerUp){
+        powerUp.disableBody(true, true);
+        this.scoreCount += 100;
     },
 
     collisionPaddle: function (ball, paddle)
