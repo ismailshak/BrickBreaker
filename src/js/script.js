@@ -9,6 +9,7 @@ var BrickBreaker = new Phaser.Class({
         this.bricks;
         this.paddle;
         this.ball;
+        this.plus100;
 
         this.score = document.querySelector(".score");
         this.lives = document.querySelector(".lives");
@@ -28,11 +29,13 @@ var BrickBreaker = new Phaser.Class({
             'atlas' references a json file (spritesheet.json) for coordinates to locate a specific sprite
             within a single png file (spritesheet.png) that contains all used assets side by side.
         */
-        this.load.atlas('assets', './../../img/Tile Set/sprites/spritesheet.png','./../../img/Tile Set/sprites/spritesheet.json')
+        this.load.atlas('assets', './../../img/tile-set/sprites/bricksSpritesheet.png','./../../img/tile-set/sprites/bricksSpritesheet.json')
 
-        this.load.atlas('paddleSprite', './../../img/Tile Set/sprites/paddleSpritesheet.png', './../../img/Tile Set/sprites/paddleSpritesheet.json');
+        this.load.atlas('paddleSprite', './../../img/tile-set/sprites/paddleSpritesheet.png', './../../img/tile-set/sprites/paddleSpritesheet.json');
 
-        this.load.atlas('oneHundredSprite', './../../img/Tile Set/sprites/oneHundredSpritesheet.png', './../../img/Tile Set/sprites/oneHundredSpritesheet.json');
+        this.load.atlas('oneHundredSprite', './../../img/tile-set/sprites/oneHundredSpritesheet.png', './../../img/tile-set/sprites/oneHundredSpritesheet.json');
+
+        this.load.atlas('powerUps', './../../img/tile-set/sprites/powerUpsSpritesheet.png', './../../img/tile-set/sprites/powerUpsSpritesheet.json');
     },
     create: function(){
 
@@ -54,9 +57,24 @@ var BrickBreaker = new Phaser.Class({
         });
 
         //console.log(this.bricks)
-        let currentBrick = this.bricks.children.entries[50]
-        currentBrick = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'oneHundredSprite', 'plusOneHundred1.png').setImmovable();
-        this.bricks.children.entries[50].disableBody(true, true);
+        for(let i = 0; i < 3; i++) {
+            let randomNumber = Math.floor(Math.random()*(this.brickColumnCount*this.brickRowCount))
+            console.log(randomNumber)
+            let currentBrick = this.bricks.children.entries[50];
+            // add power up 1
+            if(i === 0) {
+                this.plus100 = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'oneHundredSprite', 'plusOneHundred1.png').setImmovable();
+                currentBrick = this.plus100;
+                this.bricks.children.entries[50].disableBody(true, true);
+
+            } else if(i === 1) { // power up 2
+
+
+            } else { // power up 3
+
+            }
+        }
+        
         this.anims.create({
             key: 'oneHundred',
             frames: this.anims.generateFrameNames('oneHundredSprite', { 
@@ -69,7 +87,7 @@ var BrickBreaker = new Phaser.Class({
             repeat: -1
         });
         // Play the animation
-        currentBrick.play('oneHundred');
+        this.plus100.play('oneHundred');
         
         // Create ball - give bounciness of 1 and allow it to interact with scene border.
         this.ball = this.physics.add.image(this.width/2, this.paddleTop, 'assets', 'ball.png').setCollideWorldBounds(true).setBounce(1);
@@ -109,8 +127,8 @@ var BrickBreaker = new Phaser.Class({
         // Fifth parameter, this, is the callback context. i.e. to pass the specific objects (ball and brick) to the callback function.
         this.physics.add.collider(this.ball, this.bricks, this.collisionBrick, null, this);
         this.physics.add.collider(this.ball, this.paddle, this.collisionPaddle, null, this);
-        this.physics.add.collider(this.ball, currentBrick, this.collisionPowerUp, null, this);
-        this.physics.add.collider(this.paddle, currentBrick, this.collisionPickUp, null, this);
+        this.physics.add.collider(this.ball, this.plus100, this.collisionPowerUp, null, this).name = "ballAndPowerUp";
+        this.physics.add.collider(this.paddle, this.plus100, this.collisionPickUp, null, this);
 
         // Mouse event handlers
         this.input.on('pointermove', function (e) {
@@ -150,12 +168,16 @@ var BrickBreaker = new Phaser.Class({
     {   
         // Removes brick from the scene
         brick.disableBody(true, true);
-
         this.scoreCount++;
     },
 
     collisionPowerUp: function (ball, powerUp) {
         powerUp.setVelocityY(100);
+
+        // Removes collider between the ball and the falling power up.
+        this.physics.world.colliders.getActive().find(function(i){
+            return i.name == 'ballAndPowerUp'
+        }).destroy();
     },
 
     collisionPickUp: function (paddle, powerUp){
@@ -218,7 +240,7 @@ var BrickBreaker = new Phaser.Class({
         }
 
         // When player wins
-        if (this.scoreCount === this.brickColumnCount*this.brickRowCount)
+        if (this.scoreCount === this.brickColumnCount*this.brickRowCount+100)
         {
             //this.resetLevel();
             winnerOverlay.style.display = "flex";

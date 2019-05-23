@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "paddleSpritesheet.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 711,
+				"h": 25
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "paddleLong.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 125,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 125,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 125,
+						"h": 23
+					}
+				},
+				{
+					"filename": "paddle1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 88,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 88,
+						"h": 23
+					},
+					"frame": {
+						"x": 128,
+						"y": 1,
+						"w": 88,
+						"h": 23
+					}
+				},
+				{
+					"filename": "paddle11.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 88,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 88,
+						"h": 23
+					},
+					"frame": {
+						"x": 218,
+						"y": 1,
+						"w": 88,
+						"h": 23
+					}
+				},
+				{
+					"filename": "paddle12.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 88,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 88,
+						"h": 23
+					},
+					"frame": {
+						"x": 308,
+						"y": 1,
+						"w": 88,
+						"h": 23
+					}
+				},
+				{
+					"filename": "paddle13.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 88,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 88,
+						"h": 23
+					},
+					"frame": {
+						"x": 398,
+						"y": 1,
+						"w": 88,
+						"h": 23
+					}
+				},
+				{
+					"filename": "paddle2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 88,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 88,
+						"h": 23
+					},
+					"frame": {
+						"x": 488,
+						"y": 1,
+						"w": 88,
+						"h": 23
+					}
+				},
+				{
+					"filename": "paddle3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 88,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 88,
+						"h": 23
+					},
+					"frame": {
+						"x": 578,
+						"y": 1,
+						"w": 88,
+						"h": 23
+					}
+				},
+				{
+					"filename": "paddleShort.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 42,
+						"h": 23
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 42,
+						"h": 23
+					},
+					"frame": {
+						"x": 668,
+						"y": 1,
+						"w": 42,
+						"h": 23
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a243e115845e66ec64b8761b9b11c555:2db7d438566ed5229ccaa25bc928df4c:5ed05d09f37c16429cc9379e28563bd8$"
+	}
+}

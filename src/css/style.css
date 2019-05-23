@@ -34,7 +34,7 @@ canvas {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding: 50px 20px 10px 20px;
+    padding: 1rem 1rem 0 1rem;
     max-width: 30%;
 }
 
@@ -52,25 +52,25 @@ canvas {
 }
 
 .rules-container {
-    max-width: 70%;
+    max-width: 60%;
     font-family: 'Cute Font', cursive;
     font-size: 24px;
 }
 
 .stats-container {
     display: flex;
-    align-items: center;
-    border: solid 1px white;
+    justify-content: center;
+
 }
 
 .score-container, .lives-container {
-    margin: 10px;
+    margin: 5px 10px 2px 10px;
     font-family: 'Cute Font', cursive;
     font-size: 30px;
 }
 
 #game-container {
-    padding: 40px 20px 0 20px;
+    padding: 0 1rem 0 1rem;
     cursor: crosshair;
     align-self: center;
     position: relative;
@@ -119,4 +119,47 @@ canvas {
     font-size: 70px;
     text-align: center;
 }
-/* @media (min-width: ) */
+
+@media screen and (max-width: 1240px) {
+    canvas {
+      width: 640px !important; 
+      height: 480px !important;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+
+    .page-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        max-width: none;
+    }
+
+    .title-top, .title-bottom {
+        font-size: 50px
+    }
+
+    .rules-container {
+        font-size: 20px;
+    }
+
+    .score-container, .lives-container {
+        margin: 0 10px 0 10px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    canvas {
+        width: 320px !important;
+        height: 240px !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .sidebar {
+        flex-direction: column;
+    }
+}
