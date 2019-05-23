@@ -179,7 +179,11 @@ var BrickBreaker = new Phaser.Class({
         var z = e.alpha;
         var y = e.beta;
         var x = e.gamma;
-        this.paddle.x = Phaser.Math.Clamp(x, this.paddle.width/2, this.width-(this.paddle.width/2));
+        console.log(x)
+        console.log(game)
+        let paddle = game.scene.keys.brickbreaker.paddle
+        let width = game.scene.keys.brickbreaker.width;
+        paddle.x = Phaser.Math.Clamp(x, paddle.width/2, width-(paddle.width/2));
     },
 
     collisionBrick: function (ball, brick)
