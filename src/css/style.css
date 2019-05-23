@@ -1,0 +1,122 @@
+@font-face {
+    font-family: Blox;
+    src: url("../../fonts/blox-brick/blox2-webfont.ttf");
+}
+
+@font-face {
+    font-family: Arcade;
+    src: url("../../fonts/arcade-classic/arcadeclassic-webfont.ttf");
+}
+
+body {
+    background-color: black;
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    color: white;
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    height: 100vh;
+}
+
+canvas {
+    border: 5px solid white;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px 20px 10px 20px;
+    max-width: 30%;
+}
+
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-top, .title-bottom {
+    font-size: 70px;
+    font-family: Blox;
+    text-align: center;
+}
+
+.rules-container {
+    max-width: 70%;
+    font-family: 'Cute Font', cursive;
+    font-size: 24px;
+}
+
+.stats-container {
+    display: flex;
+    align-items: center;
+    border: solid 1px white;
+}
+
+.score-container, .lives-container {
+    margin: 10px;
+    font-family: 'Cute Font', cursive;
+    font-size: 30px;
+}
+
+#game-container {
+    padding: 40px 20px 0 20px;
+    cursor: crosshair;
+    align-self: center;
+    position: relative;
+}
+
+.gameover-container, .winner-container {
+    background-color: rgba(0,0,0, 0.85);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index:99;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.message {
+    z-index: inherit;
+    font-family: Arcade;
+    font-size: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.retry, .play-again {
+    width: 100px;
+    height: 60px;
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: 'Cute Font', cursive;
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    align-self: center;
+}
+
+.play-again {
+    width: 200px;
+}
+
+.chicken-dinner {
+    font-size: 70px;
+    text-align: center;
+}
+/* @media (min-width: ) */
