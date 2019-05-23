@@ -171,6 +171,15 @@ var BrickBreaker = new Phaser.Class({
             }
 
         }, this);
+
+        window.addEventListener("deviceorientation", this.handleOrientation, true);
+    },
+
+    handleOrientation: function(e) {
+        var z = e.alpha;
+        var y = e.beta;
+        var x = e.gamma;
+        this.paddle.x = Phaser.Math.Clamp(x, this.paddle.width/2, this.width-(this.paddle.width/2));
     },
 
     collisionBrick: function (ball, brick)
