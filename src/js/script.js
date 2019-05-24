@@ -13,6 +13,8 @@ var BrickBreaker = new Phaser.Class({
         this.expand;
         this.shrink;
 
+        this.godMode = false;
+
         this.score = document.querySelector(".score");
         this.lives = document.querySelector(".lives");
         this.scoreCount = 0;
@@ -21,7 +23,7 @@ var BrickBreaker = new Phaser.Class({
 
         this.width = config.scale.width;        // canvas width
         this.height = config.scale.height;      // canvas height
-        this.brickRowCount = 6;                 // for referencing uses only, doesn't dynamically adjust grid. (to change rows you have to edit amount of sprites in the array to match this number)
+        this.brickRowCount = 1;                 // for referencing uses only, doesn't dynamically adjust grid. (to change rows you have to edit amount of sprites in the array to match this number)
         this.brickColumnCount = 10;             // this can changes the grid dynamically to fit custom column count
         this.paddleTop = 525;                   // y coordinate to place the ball on
     },
@@ -51,7 +53,7 @@ var BrickBreaker = new Phaser.Class({
             frameQuantity is how many times you print a specific index in frame.
         */
         this.bricks = this.physics.add.staticGroup({
-            key: 'assets', frame: [ 'greyTile.png', 'redTile.png', 'yellowTile.png', 'skyBlueTile.png', 'purpleTile.png', 'greyTile.png'],
+            key: 'assets', frame: [ 'blueTile.png'],//, 'redTile.png', 'yellowTile.png', 'skyBlueTile.png', 'purpleTile.png', 'greyTile.png'],
             frameQuantity: this.brickColumnCount,
             gridAlign: { width: this.brickColumnCount, height: this.brickRowCount, cellWidth: 70, cellHeight: 30, x: 85, y: 50 }
         });
@@ -139,13 +141,17 @@ var BrickBreaker = new Phaser.Class({
         // Mouse event handlers
         this.input.on('pointermove', function (e) {
 
-            // Paddle position doesn't phase outside the scene
-            this.paddle.x = Phaser.Math.Clamp(e.x, this.paddle.width/2, this.width-(this.paddle.width/2));
+            if(this.godMode === true) {
+                this.ball.x = e.x;
+                this.ball.y = e.y;
+            } else {
+                // Paddle position doesn't phase outside the scene
+                this.paddle.x = Phaser.Math.Clamp(e.x, this.paddle.width/2, this.width-(this.paddle.width/2));
 
-            // For the ball to move with the paddle at the start of a life/round
-            if (this.ball.getData('onPaddle'))
-            {
-                this.ball.x = this.paddle.x;
+                // For the ball to move with the paddle at the start of a life/round
+                if (this.ball.getData('onPaddle')){
+                    this.ball.x = this.paddle.x;
+                }
             }
 
         }, this);
@@ -296,7 +302,8 @@ var BrickBreaker = new Phaser.Class({
         // When player loses all lives, show game over screen
         if(this.livesCount === 0) {
             gameoverOverlay.style.display = "flex";
-            this.scoreCount = 0;
+            scoreNumber[0].innerHTML = this.scoreCount;
+            //this.scoreCount = 0;
         }
 
         // If ball falls below lower edge of screen, reset ball's position and remove a life
@@ -306,8 +313,10 @@ var BrickBreaker = new Phaser.Class({
         }
 
         // When player wins (number of bricks - number of power ups in the game) display winner screen
-        if (this.bricks.countActive === 0) {
+        if (this.bricks.countActive() === 0) {
             winnerOverlay.style.display = "flex";
+            
+            scoreNumber[1].innerHTML = this.scoreCount;
         }
     }
 })
@@ -334,6 +343,9 @@ const gameoverOverlay = document.querySelector(".gameover-container");
 const winnerOverlay = document.querySelector(".winner-container");
 const instructionsButton = document. querySelector(".instructions");
 const rules = document.querySelector(".rules-container");
+
+// scoreNumber[0] is gameover overlay and scoreNumber[1] is winner overlay
+const scoreNumber = document.querySelectorAll(".score-number")
 
 // When retry clicked, refresh the page
 retryButton.addEventListener('click', function(e){

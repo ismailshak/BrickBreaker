@@ -117,14 +117,20 @@ canvas {
     flex-direction: column;
 }
 
+.score-text {
+    font-family: Arcade;
+    font-size: 50px;
+    text-align: center;
+}
+
 .retry, .play-again {
-    width: 100px;
+    width: 120px;
     height: 60px;
     background: transparent;
     border: 1px solid white;
     border-radius: 5px;
-    font-family: 'Cute Font', cursive;
-    font-size: 50px;
+    font-family: Arcade;
+    font-size: 30px;
     color: white;
     cursor: pointer;
     align-self: center;
