@@ -56,12 +56,15 @@ var BrickBreaker = new Phaser.Class({
             gridAlign: { width: this.brickColumnCount, height: this.brickRowCount, cellWidth: 70, cellHeight: 30, x: 85, y: 50 }
         });
 
+        // Positions power ups in random places on the grid
         for(let i = 0; i < 3; i++) {
             let randomNumber = Math.floor(Math.random()*(this.brickColumnCount*this.brickRowCount))
+            // Brick that occupies the space needed to place power up
             let currentBrick = this.bricks.children.entries[randomNumber];
-            
+        
             if(i === 0) { // add power up 1 i.e. plus100
                 this.plus100 = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'oneHundredSprite', 'plusOneHundred1.png').setImmovable();
+                // Place power up on top of brick then destroy brick
                 currentBrick = this.plus100;
                 this.bricks.children.entries[randomNumber].disableBody(true, true);
             } else if(i === 1) { // power up 2 i.e. expand paddle
@@ -82,7 +85,6 @@ var BrickBreaker = new Phaser.Class({
        
         // Create paddle object and disable force interactions.
         this.paddle = this.physics.add.sprite(this.width/2, 550, 'paddleSprite', 'paddle1.png').setImmovable();
-        console.log(this.paddle)
 
         /*
             Create an animation for paddle.
@@ -90,7 +92,7 @@ var BrickBreaker = new Phaser.Class({
             generateFrameNames goes through the spritesheet (.json) and renders sprites
             from the frames called paddleX.png. The prefix is the start of the file name,
             suffix is the end of the file name and the loop substitutes X with the start value
-            up to and including the end value.
+            up to and including the end value (e.g. paddle1.png).
             repeat = -1 just means infinitely.
         */
         this.anims.create({
@@ -124,7 +126,7 @@ var BrickBreaker = new Phaser.Class({
         // Colliders that handle ball to paddle contact and ball to brick contact.
         // When a certain type of contact occurs, third parameter is the callback function.
         // Fifth parameter, this, is the callback context. i.e. to pass the specific objects (ball and brick) to the callback function.
-        // Using 'name' to reference object later
+        // Using 'name' to reference that object later
         this.physics.add.collider(this.ball, this.bricks, this.collisionBrick, null, this);
         this.physics.add.collider(this.ball, this.paddle, this.collisionPaddle, null, this);
         this.physics.add.collider(this.ball, this.plus100, this.collisionPlus100, null, this).name = "ballAndPlus100";
@@ -304,7 +306,7 @@ var BrickBreaker = new Phaser.Class({
         }
 
         // When player wins (number of bricks - number of power ups in the game) display winner screen
-        if (this.bricks.countActive === this.brickRowCount*this.brickColumnCount-3) {
+        if (this.bricks.countActive === 0) {
             winnerOverlay.style.display = "flex";
         }
     }
