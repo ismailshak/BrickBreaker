@@ -13,8 +13,6 @@ var BrickBreaker = new Phaser.Class({
         this.expand;
         this.shrink;
 
-        this.godMode = false;
-
         this.score = document.querySelector(".score");
         this.lives = document.querySelector(".lives");
         this.scoreCount = 0;
@@ -151,18 +149,14 @@ var BrickBreaker = new Phaser.Class({
         // Mouse event handlers
         this.input.on('pointermove', function (e) {
 
-            if(this.godMode === true) {
-                this.ball.x = e.x;
-                this.ball.y = e.y;
-            } else {
-                // Paddle position doesn't phase outside the scene
-                this.paddle.x = Phaser.Math.Clamp(e.x, this.paddle.width/2, this.width-(this.paddle.width/2));
+            // Paddle position doesn't phase outside the scene
+            this.paddle.x = Phaser.Math.Clamp(e.x, this.paddle.width/2, this.width-(this.paddle.width/2));
 
-                // For the ball to move with the paddle at the start of a life/round
-                if (this.ball.getData('onPaddle')){
-                    this.ball.x = this.paddle.x;
-                }
+            // For the ball to move with the paddle at the start of a life/round
+            if (this.ball.getData('onPaddle')){
+                this.ball.x = this.paddle.x;
             }
+            
 
         }, this);
 

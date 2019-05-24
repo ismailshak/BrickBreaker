@@ -199,5 +199,30 @@ canvas {
     .rules-container{
         display: none;
     }
+
+    .message {
+        font-size: 60px;
+    }
+
+    .score-text {
+        font-family: Arcade;
+        font-size: 50px;
+        text-align: center;
+    }
+    
+    .retry, .play-again {
+        background: transparent;
+        border: 1px solid white;
+        border-radius: 5px;
+        font-family: Arcade;
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+        align-self: center;
+    }
+
+    .chicken-dinner {
+        font-size: 40px;
+    }
         
 }
