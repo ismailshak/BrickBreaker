@@ -23,7 +23,7 @@ var BrickBreaker = new Phaser.Class({
 
         this.width = config.scale.width;        // canvas width
         this.height = config.scale.height;      // canvas height
-        this.brickRowCount = 1;                 // for referencing uses only, doesn't dynamically adjust grid. (to change rows you have to edit amount of sprites in the array to match this number)
+        this.brickRowCount = 6;                 // for referencing uses only, doesn't dynamically adjust grid. (to change rows you have to edit amount of sprites in the array to match this number)
         this.brickColumnCount = 10;             // this can changes the grid dynamically to fit custom column count
         this.paddleTop = 525;                   // y coordinate to place the ball on
     },
@@ -53,10 +53,20 @@ var BrickBreaker = new Phaser.Class({
             frameQuantity is how many times you print a specific index in frame.
         */
         this.bricks = this.physics.add.staticGroup({
-            key: 'assets', frame: [ 'blueTile.png'],//, 'redTile.png', 'yellowTile.png', 'skyBlueTile.png', 'purpleTile.png', 'greyTile.png'],
+            key: 'assets', frame: [ 'greyTile.png', 'redTile.png', 'yellowTile.png', 'skyBlueTile.png', 'purpleTile.png', 'greyTile.png'],
             frameQuantity: this.brickColumnCount,
             gridAlign: { width: this.brickColumnCount, height: this.brickRowCount, cellWidth: 70, cellHeight: 30, x: 85, y: 50 }
         });
+
+        /* 
+            TODO:
+            - shuffle bricks in between both grey rows (fisher-yates algorithm)
+        */
+
+        /*
+            TODO:
+            - add a feature that handles the off chance we get the same random number again
+        */
 
         // Positions power ups in random places on the grid
         for(let i = 0; i < 3; i++) {
