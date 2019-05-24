@@ -162,7 +162,8 @@ canvas {
     }
 
     .rules-container {
-        font-size: 20px;
+        font-size: 16px;
+        max-width: 70%;
     }
 
     .score-container, .lives-container {

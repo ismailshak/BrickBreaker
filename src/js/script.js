@@ -17,6 +17,7 @@ var BrickBreaker = new Phaser.Class({
         this.lives = document.querySelector(".lives");
         this.scoreCount = 0;
         this.livesCount = 3;
+        this.fallSpeed = 100;
 
         this.width = config.scale.width;        // canvas width
         this.height = config.scale.height;      // canvas height
@@ -29,14 +30,11 @@ var BrickBreaker = new Phaser.Class({
         /* 
             sprite sheet that contains all my assets.
             'atlas' references a json file (spritesheet.json) for coordinates to locate a specific sprite
-            within a single png file (spritesheet.png) that contains all used assets side by side.
+            within a png file (spritesheet.png) that contains all used assets side by side.
         */
         this.load.atlas('assets', './../../img/tile-set/sprites/bricksSpritesheet.png','./../../img/tile-set/sprites/bricksSpritesheet.json')
-
         this.load.atlas('paddleSprite', './../../img/tile-set/sprites/paddleSpritesheet.png', './../../img/tile-set/sprites/paddleSpritesheet.json');
-
         this.load.atlas('oneHundredSprite', './../../img/tile-set/sprites/oneHundredSpritesheet.png', './../../img/tile-set/sprites/oneHundredSpritesheet.json');
-
         this.load.atlas('powerUps', './../../img/tile-set/sprites/powerUpsSpritesheet.png', './../../img/tile-set/sprites/powerUpsSpritesheet.json');
     },
     create: function(){
@@ -53,41 +51,38 @@ var BrickBreaker = new Phaser.Class({
             frameQuantity is how many times you print a specific index in frame.
         */
         this.bricks = this.physics.add.staticGroup({
-            key: 'assets', frame: [ 'redTile.png', 'greenTile.png', 'blueTile.png', 'redTile.png', 'greenTile.png', 'blueTile.png' ],
+            key: 'assets', frame: [ 'greyTile.png', 'redTile.png', 'yellowTile.png', 'skyBlueTile.png', 'purpleTile.png', 'greyTile.png'],
             frameQuantity: this.brickColumnCount,
             gridAlign: { width: this.brickColumnCount, height: this.brickRowCount, cellWidth: 70, cellHeight: 30, x: 85, y: 50 }
         });
 
-        let count = 50;
-        //console.log(this.bricks)
         for(let i = 0; i < 3; i++) {
             let randomNumber = Math.floor(Math.random()*(this.brickColumnCount*this.brickRowCount))
-            let currentBrick = this.bricks.children.entries[count];
-            // add power up 1
-            if(i === 0) {
+            let currentBrick = this.bricks.children.entries[randomNumber];
+            
+            if(i === 0) { // add power up 1 i.e. plus100
                 this.plus100 = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'oneHundredSprite', 'plusOneHundred1.png').setImmovable();
                 currentBrick = this.plus100;
-                this.bricks.children.entries[count].disableBody(true, true);
-
-            } else if(i === 1) { // power up 2
+                this.bricks.children.entries[randomNumber].disableBody(true, true);
+            } else if(i === 1) { // power up 2 i.e. expand paddle
                 this.expand = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'powerUps', 'expand.png').setImmovable();
                 currentBrick = this.expand;
-                this.bricks.children.entries[count].disableBody(true, true);
-            } else { // power up 3
+                this.bricks.children.entries[randomNumber].disableBody(true, true);
+            } else if(i === 2){ // power up 3 i.e. shrink paddle
                 this.shrink = this.physics.add.sprite(currentBrick.x, currentBrick.y, 'powerUps', 'shrink.png').setImmovable();
                 currentBrick = this.shrink;
-                this.bricks.children.entries[count].disableBody(true, true);
+                this.bricks.children.entries[randomNumber].disableBody(true, true);
             }
-            count++;
         }
         
         // Create ball - give bounciness of 1 and allow it to interact with scene border.
         this.ball = this.physics.add.image(this.width/2, this.paddleTop, 'assets', 'ball.png').setCollideWorldBounds(true).setBounce(1);
         // Custom data property added to ball object to track its contact with the paddle.
         this.ball.setData('onPaddle', true);
-
+       
         // Create paddle object and disable force interactions.
         this.paddle = this.physics.add.sprite(this.width/2, 550, 'paddleSprite', 'paddle1.png').setImmovable();
+        console.log(this.paddle)
 
         /*
             Create an animation for paddle.
@@ -124,15 +119,15 @@ var BrickBreaker = new Phaser.Class({
             frameRate: 5,
             repeat: -1
         });
-        // Play the animation
         this.plus100.play('oneHundred');
 
         // Colliders that handle ball to paddle contact and ball to brick contact.
         // When a certain type of contact occurs, third parameter is the callback function.
         // Fifth parameter, this, is the callback context. i.e. to pass the specific objects (ball and brick) to the callback function.
+        // Using 'name' to reference object later
         this.physics.add.collider(this.ball, this.bricks, this.collisionBrick, null, this);
         this.physics.add.collider(this.ball, this.paddle, this.collisionPaddle, null, this);
-        this.physics.add.collider(this.ball, this.plus100, this.collisionPowerUp, null, this).name = "ballAndPowerUp";
+        this.physics.add.collider(this.ball, this.plus100, this.collisionPlus100, null, this).name = "ballAndPlus100";
         this.physics.add.collider(this.ball, this.expand, this.collisionExpand, null, this).name = "ballAndExpand";
         this.physics.add.collider(this.ball, this.shrink, this.collisionShrink, null, this).name = "ballAndShrink";
         this.physics.add.collider(this.paddle, this.plus100, this.collision100PickUp, null, this);
@@ -175,17 +170,19 @@ var BrickBreaker = new Phaser.Class({
     },
 
     handleOrientation: function(e) {
-        var z = e.alpha;
-        var y = e.beta;
-        var x = e.gamma;
-        console.log(x)
+        // Rotation amount based on axis of motion
+        let z = e.alpha;
+        let y = e.beta;
+        let x = e.gamma;
+
+        // Temp variables since 'this' in this scope references the entire window.
         let paddleTemp = game.scene.keys.brickbreaker.paddle
         let widthTemp = game.scene.keys.brickbreaker.width;
         let ballTemp = game.scene.keys.brickbreaker.ball;
         let NewValue = (((x - (-90)) * (widthTemp - 0)) / (90 - (-90))) + 0
-        paddleTemp.x = NewValue;//Phaser.Math.Clamp(x, paddleTemp.width/2, widthTemp-(paddleTemp.width/2));
-        console.log(NewValue)
+        paddleTemp.x = Phaser.Math.Clamp(NewValue, paddleTemp.width/2, widthTemp-(paddleTemp.width/2));
 
+        // Move the ball with the baddle at start of round/life
         if (ballTemp.getData('onPaddle'))
         {
             ballTemp.x = paddleTemp.x;
@@ -194,22 +191,31 @@ var BrickBreaker = new Phaser.Class({
 
     collisionBrick: function (ball, brick)
     {   
-        // Removes brick from the scene
-        brick.disableBody(true, true);
-        this.scoreCount++;
+        // If a brick is grey, it needs two hits to break
+        if(brick.frame.customData.filename === "greyTile.png") {
+            brick.setTexture('assets', 'greyTile1.png')
+        } else {
+            // Removes brick from the scene
+            brick.disableBody(true, true);
+            this.scoreCount++;
+        }
     },
 
-    collisionPowerUp: function (ball, powerUp) {
-        powerUp.setVelocityY(100);
+    collisionPlus100: function (ball, powerUp) {
+
+        // Speed of falling
+        powerUp.setVelocityY(this.fallSpeed);
 
         // Removes collider between the ball and the falling power up.
         this.physics.world.colliders.getActive().find(function(i){
-            return i.name == 'ballAndPowerUp'
+            return i.name == 'ballAndPlus100'
         }).destroy();
     },
 
     collisionExpand: function(ball, expand) {
-        expand.setVelocityY(100);
+
+        // Speed of falling
+        expand.setVelocityY(this.fallSpeed);
 
         // Removes collider between the ball and the falling power up.
         this.physics.world.colliders.getActive().find(function(i){
@@ -218,26 +224,35 @@ var BrickBreaker = new Phaser.Class({
     },
 
     collisionShrink: function(ball, expand) {
-        expand.setVelocityY(100);
+
+        // Speed of falling
+        expand.setVelocityY(this.fallSpeed);
 
         // Removes collider between the ball and the falling power up.
         this.physics.world.colliders.getActive().find(function(i){
             return i.name == 'ballAndShrink'
         }).destroy();
     },
-    collision100PickUp: function (paddle, powerUp){
+
+    collision100PickUp: function(paddle, powerUp){
+
+        // Remove power up and add 100 points to score
         powerUp.disableBody(true, true);
         this.scoreCount += 100;
         
     },
 
     collisionExpandPickUp: function(paddle, expand){
+
+        // Remove power up, disable any animations and change its sprite to the bigger paddle
         expand.disableBody(true, true);
         this.paddle.anims.pause();
         paddle.setTexture('paddleSprite','paddleLong.png')
     },
 
     collisionShrinkPickUp: function(paddle, shrink) {
+
+        // Remove power up, disable any animations and change its sprite to the smaller paddle
         shrink.disableBody(true, true);
         this.paddle.anims.pause();
         paddle.setTexture('paddleSprite','paddleShort.png')
@@ -245,19 +260,17 @@ var BrickBreaker = new Phaser.Class({
 
     collisionPaddle: function (ball, paddle)
     {
-        // How far the ball hits the paddle compared to midpoint of paddle
+        // How far the ball hits the paddle compared to midpoint of the paddle
         let offset = 0;
 
         // Hits the left side
-        if (ball.x < paddle.x)
-        {
+        if (ball.x < paddle.x) {
             offset = paddle.x-ball.x;
             // Faster speed the further away it is from the center
             ball.setVelocityX(-10*offset);
         }
         // Hits the right side
-        else if (ball.x > paddle.x)
-        {
+        else if (ball.x > paddle.x) {
             offset = ball.x-paddle.x;
             // Faster speed the further away it is from the center
             ball.setVelocityX(10*offset);
@@ -266,41 +279,32 @@ var BrickBreaker = new Phaser.Class({
 
     resetBall: function ()
     {
+        // Places back on paddle
         this.ball.setVelocity(0);
         this.ball.setPosition(this.paddle.x, this.paddleTop);
         this.ball.setData('onPaddle', true);
     },
 
-    resetLevel: function ()
-    {
-        this.resetBall();
-        // Re-render every brick in the bricks group
-        this.bricks.children.each(brick => brick.enableBody(false, 0, 0, true, true));
-    },
     update: function() {
 
-        // Updates the score and lives every frame
+        // Updates the score/lives every frame
         this.score.innerText = this.scoreCount;
         this.lives.innerText = this.livesCount;
 
-        // When player loses all lives, reset the game
+        // When player loses all lives, show game over screen
         if(this.livesCount === 0) {
-            //this.resetLevel();
             gameoverOverlay.style.display = "flex";
             this.scoreCount = 0;
         }
 
-        // If ball falls below lower edge of screen, reset ball's position
-        if (this.ball.y > this.height)
-        {
+        // If ball falls below lower edge of screen, reset ball's position and remove a life
+        if (this.ball.y > this.height) {
             this.resetBall();
             this.livesCount--;
         }
 
-        // When player wins
-        if (this.scoreCount === this.brickColumnCount*this.brickRowCount+100)
-        {
-            //this.resetLevel();
+        // When player wins (number of bricks - number of power ups in the game) display winner screen
+        if (this.bricks.countActive === this.brickRowCount*this.brickColumnCount-3) {
             winnerOverlay.style.display = "flex";
         }
     }
@@ -329,17 +333,20 @@ const winnerOverlay = document.querySelector(".winner-container");
 const instructionsButton = document. querySelector(".instructions");
 const rules = document.querySelector(".rules-container");
 
+// When retry clicked, refresh the page
 retryButton.addEventListener('click', function(e){
     e.preventDefault();
     document.location.reload();
 });
+
+// When retry clicked, refresh the page
 playAgainButton.addEventListener('click', function(e){
     e.preventDefault();
     document.location.reload();
 });
 
+// When instructions span clicked, toggle rules container on or off
 instructionsButton.addEventListener('click', function(e) {
-    
     e.preventDefault();
     if(rules.style.display === "none") {
         rules.style.display = "block";
@@ -347,7 +354,3 @@ instructionsButton.addEventListener('click', function(e) {
         rules.style.display = "none"
     }
 })
-
-// function restartGame() {
-//     document.location.reload();
-// }
