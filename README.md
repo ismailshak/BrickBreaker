@@ -4,17 +4,21 @@ For my first project assignment at General Assembly, I chose to build the popula
 
 ## Demo
 
-I've hosted the game on Heroku for you to try out, click [here](https://brick-break-project1.herokuapp.com/index.html). The same link is available in the description at the top of the page. Have fun!
+I've hosted the game on Heroku (web server hosting site) for you to try out, click [here](https://brick-break-project1.herokuapp.com/index.html). The same link is available in the description at the top of the page. Have fun!
 
-## Rules/How To Play
+## How To Play
 
-The aim of the game is destroy all the bricks. They willlook like this: <br>
+The aim of the game is destroy all the bricks. They will look like this:
+
 ![Brick Example](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/blueTile.png "Brick Example")
 
-Your only weapon is a ball and paddle. The ball bounces around the scene and destroys bricks on contact. All bricks take one hit to break, except for the grey brick, which needs two: <br>
+Your only tool set is a ball and a paddle. The ball bounces around the scene and destroys bricks on contact. All bricks take one hit to break, except for the grey brick, which needs two:
+
 ![Grey Brick](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/greyTile.png "Grey Brick")
 
-Use your paddle to keep the ball in play. If the ball falls below your paddle, you lose a life and get 5 points taken off your score.
+Use your paddle to keep the ball in play. If the ball falls below your paddle, you lose a life.
+
+You start with 3 lives, if you lose them all. Game over.
 
 ### Paddle
 
@@ -34,13 +38,13 @@ For the time being, it only registers the devices tilt along one axis. So make s
 
 ### Power Ups
 
-When playing you'll notice some bricks are replaced with power ups. These fall when they make contact with the ball. If you catch them with your paddle their affect is applied.
+When playing you'll notice some bricks are replaced with power ups. These fall when they make contact with the ball. If you catch them with your paddle, their effect is applied.
 
 1. +100
 
 ![+100](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/plusOneHundred1.png "+100")
 
-This will add 100 points to you score.
+This will add 100 points to your score.
 
 2. Expand Paddle
 
@@ -52,7 +56,7 @@ This makes your paddle 1.5x larger
 
 ![Shrink Paddle](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/shrink.png "Shrink Paddle")
 
-Although not a power up, so to speak, this will shrink your paddle down to just the metal edges. Be careful not pick them up. If you thrive under pressure, this might be for you.
+Although not a power up, so to speak, this will shrink your paddle down to just the metal edges. Be careful not to pick them up. Unless you're a thrill seeker, then this might be for you.
 
 ### Score
 
@@ -78,11 +82,13 @@ Add more power ups that:
 3. +50/250/500 to your score.
 
 Add more functionalities:
-1. Timer feature that factors in time taken to the overall score.
+1. Timer feature, that factors in time taken to the overall score.
 2. Improved mobile optimization.
 3. Using all orientation axis to mobile devices so user can tilt device in a more intuitive motion.
 
 ## Take Aways
+
+The biggest skill I've picked up while tackling this project was reading and quickly understanding a new API. The first time I heard of Phaser.js was project day 1. In 4 days I had to read, learn and apply functions and behaviors to my game objects to reach a presentable, fully functioning demo.
 
 ## Known Issues
 
