@@ -10,7 +10,7 @@ I've hosted the game on Heroku (web server hosting site) for you to try out, cli
 
 The aim of the game is destroy all the bricks. They will look like this:
 
-![Brick Example](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/greenTile.png "Brick Example")
+![Brick Example](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/limeTile.png "Brick Example")
 
 Your only tool set is a ball and a paddle. The ball bounces around the scene and destroys bricks on contact. All bricks take one hit to break, except for the grey brick, which needs two:
 
