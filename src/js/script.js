@@ -320,6 +320,7 @@ var BrickBreaker = new Phaser.Class({
         if (this.ball.y > this.height) {
             this.resetBall();
             this.livesCount--;
+            this.scoreCount -= 5;
         }
 
         // When player wins (number of bricks - number of power ups in the game) display winner screen
