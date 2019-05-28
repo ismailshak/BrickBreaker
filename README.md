@@ -8,7 +8,7 @@ I've hosted the game on Heroku (web server hosting site) for you to try out, cli
 
 ## How To Play
 
-The aim of the game is destroy all the bricks. They will look like this:
+The aim of the game is to destroy all the bricks in the scene. They will look like this:
 
 ![Brick Example](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/limeTile.png "Brick Example")
 
@@ -18,19 +18,19 @@ Your only tool set is a ball and a paddle. The ball bounces around the scene and
 
 Use your paddle to keep the ball in play. If the ball falls below your paddle, you lose a life.
 
-You start with 3 lives, if you lose them all. Game over.
+You start with 3 lives. If you lose them all... Game over.
 
 ### Paddle
 
 ![Paddle](https://github.com/ismailshak/BrickBreaker/blob/master/img/tile-set/PNG/paddle1.png "Paddle")
 
-The paddle tracks the mouse's movements to adjust its position. At the start the game, the ball is placed on the paddle and waits for the user to click on the game scene to kick it off.
+The paddle tracks the mouse's movements to adjust its position. At the start of the game, the ball is placed on the paddle and waits for the user to click on the game scene to kick it off.
 
 Whenever you lose a life, the ball resets on the paddle and waits for the user to click again.
 
 ##### Mobile Devices
 
-For smart phones/tablets, I've added a feature the uses the devices orientation to move the paddle. This makes it easier on th user to move the paddle, rather than holding your finger on the game scene and moving it that way.
+For smart phones/tablets, I've added a feature the uses the device's orientation to move the paddle. This makes it easier on the user to move the paddle, rather than holding your finger on the game scene and moving it that way.
 
 For the time being, it only registers the devices tilt along one axis. So make sure you hold your device up straight!
 
@@ -38,7 +38,7 @@ For the time being, it only registers the devices tilt along one axis. So make s
 
 ### Power Ups
 
-When playing you'll notice some bricks are replaced with power ups. These fall when they make contact with the ball. If you catch them with your paddle, their effect is applied.
+When playing, you'll notice some bricks are replaced with power ups. These fall when they make contact with the ball. If you catch them with your paddle, their effect is applied.
 
 1. +100
 
