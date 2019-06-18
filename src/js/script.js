@@ -16,7 +16,7 @@ var BrickBreaker = new Phaser.Class({
         this.score = document.querySelector(".score");
         this.lives = document.querySelector(".lives");
         this.scoreCount = 0;
-        this.livesCount = 3;
+        this.livesCount = 1;
         this.fallSpeed = 100;
 
         this.width = config.scale.width;        // canvas width
@@ -51,7 +51,7 @@ var BrickBreaker = new Phaser.Class({
             frameQuantity is how many times you print a specific index in frame.
         */
         this.bricks = this.physics.add.staticGroup({
-            key: 'assets', frame: [ 'greyTile.png', 'redTile.png', 'yellowTile.png', 'skyBlueTile.png', 'purpleTile.png', 'greyTile.png'],
+            key: 'assets', frame: [ 'blueTile.png'],//, 'redTile.png', 'yellowTile.png', 'skyBlueTile.png', 'purpleTile.png', 'greyTile.png'],
             frameQuantity: this.brickColumnCount,
             gridAlign: { width: this.brickColumnCount, height: this.brickRowCount, cellWidth: 70, cellHeight: 30, x: 85, y: 50 }
         });
