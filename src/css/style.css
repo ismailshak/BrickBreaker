@@ -61,7 +61,7 @@ canvas {
 .instructions {
     display: none;
     font-family: 'Nova Square', cursive;
-    font-size: 24px;
+    font-size: 20px;
     text-decoration: underline;
 }
 
@@ -85,7 +85,7 @@ canvas {
 .score-container, .lives-container {
     margin: 5px 10px 2px 10px;
     font-family: 'Nova Square', cursive;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 #game-container {

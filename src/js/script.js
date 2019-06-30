@@ -16,7 +16,7 @@ var BrickBreaker = new Phaser.Class({
         this.score = document.querySelector(".score");
         this.lives = document.querySelector(".lives");
         this.scoreCount = 0;
-        this.livesCount = 1;
+        this.livesCount = 3;
         this.fallSpeed = 100;
 
         this.width = config.scale.width;        // canvas width
@@ -320,7 +320,7 @@ var BrickBreaker = new Phaser.Class({
         // When player wins (number of bricks - number of power ups in the game) display winner screen
         if (this.bricks.countActive() === 0) {
             winnerOverlay.style.display = "flex";
-            
+            this.resetBall()
             scoreNumber[1].innerHTML = this.scoreCount;
         }
     }
